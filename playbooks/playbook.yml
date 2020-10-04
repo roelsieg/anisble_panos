@@ -1,0 +1,10 @@
+---
+- name: create a rule
+  hosts: panorama
+  connection: local
+  gather_facts: false
+
+  roles:
+    # - panos_create_object
+    # - panos_create_group
+    - panos_create_rule

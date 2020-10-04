@@ -1,0 +1,18 @@
+# Ignore Vagrant directories
+/topology.yml
+*-console.log
+
+#Ignore fetched external repo(s)
+
+
+# Ignore Ansible retry and log files
+*.retry
+ansible.log
+
+#Ingnore directory
+notes
+scripts
+toolkit/jinja2/test
+playbooks/config
+local.yml
+
