@@ -15,4 +15,4 @@ scripts
 toolkit/jinja2/test
 playbooks/config
 local.yml
-
+.vagrant
