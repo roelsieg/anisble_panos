@@ -65,15 +65,15 @@ sudo pip3 install $QUIET ansible-lint
 # Install latest Ansible version with pip
 #
 echo "Installing Ansible"
-# 20191106 version pinned due to temp issue juniper ansible 2.9.0
-sudo pip3 install $QUIET ansible==2.8.0
+sudo pip3 install $QUIET ansible
 #
 # Install NAPALM
 #
 echo "Installing NAPALM and Junos EZPY"
 sudo pip3 install $QUIET napalm napalm-ansible
-echo "Installing Junos roles"
-sudo ansible-galaxy install juniper.junos
+echo "Installing Panos roles"
+pip3 install pan-os-python
+ansible-galaxy collection install paloaltonetworks.panos
 echo "Installation complete. Let's test Ansible and NAPALM version"
 echo
 ansible-playbook --version

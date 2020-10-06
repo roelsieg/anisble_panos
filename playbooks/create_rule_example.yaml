@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  collections:
+    - paloaltonetworks.panos
+  tasks:
+    - panos_security_rule:
+        provider: '{{ device }}'
+        device_group: 'name-cluster'
+        rule_name: 'rule_name'
+        source_zone: 'any'
+        destination_zone: 'any'
+        source_ip: 'any'
+        destination_ip: 'any'
+        application: 'any'
+        rulebase: 'post-rulebase'
+        service: ['service-https']
+        action: 'allow'
+        # vsys: 'vsys2'
+        description: 'My first ansible rule'
+        # tag_name: ['Prod']
+        # state: present
+        commit: true
+      name: Create first security rule

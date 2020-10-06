@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  collections:
+    - paloaltonetworks.panos
+  tasks:
+    - panos_security_rule_facts:
+        provider: '{{ device }}'
+        device_group: 'name-cluster'
+        rulebase: 'post-rulebase'
+        rule_name: 'rule_name'
+      name: Get the definition for rule 'rule_name'
+      register: rule_read
+    - set_fact:
+        update_service: "{{ rule_read.spec.service  + ['service-http'] }}"
+    - panos_security_rule:
+        provider: '{{ device }}'
+        device_group: 'name-cluster'
+        rule_name: 'rule_name'
+        source_zone: '{{ rule_read.spec.source_zone }}'
+        destination_zone: '{{ rule_read.spec.destination_zone }}'
+        source_ip: '{{ rule_read.spec.source_ip }}'
+        destination_ip: '{{ rule_read.spec.destination_ip }}'
+        application: '{{ rule_read.spec.application }}'
+        action: '{{ rule_read.spec.action }}'
+        service: '{{ update_service }}'
+        rulebase: 'post-rulebase'
+        state: present
+      name: Update service in security rule
